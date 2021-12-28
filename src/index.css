@@ -1,41 +1,60 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 * {
-  margin: 0;
-  color: rgb(27, 27, 27);
+    margin: 0;
+    color: rgb(27, 27, 27);
 }
 
 .navBar {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0px 0px 15px 1px rgb(87, 87, 87);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 15px 1px rgb(87, 87, 87);
+}
+
+.navBar h1 a {
+    text-decoration: none;
 }
 
 .navBar .links {
-  margin-left: auto;
+    margin-left: auto;
 }
 
-.navBar a {
-  font-weight: bold;
-  padding: 10px;
-  color:rgb(0, 102, 255);
-  transition: 0.3s;
+.navBar .links a {
+    font-weight: bold;
+    padding: 10px;
+    color: rgb(0, 102, 255);
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-.navBar a:hover {
-  color:rgb(17, 17, 17)
+.navBar .links a:hover {
+    color: rgb(17, 17, 17);
 }
 
+.grid .cells {
+    padding: 20px;
+}
+
+.grid .cells .cellRow {
+    height: 25px;
+    vertical-align: top;
+}
+
+.grid .cells .cellRow button {
+    color: rgb(150, 150, 150);
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    border: 1px solid rgba(200, 200, 200, 0.9);
+}

@@ -1,14 +1,17 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 const NavBar = () => {
     return (
         <div>
             <nav className='navBar'>
                 <h1>
-                    Jason Liu
+                    <Link to=''>Jason Liu</Link>
                 </h1>
                 <div className='links'>
-                    <a>Link 1</a>
-                    <a>Link 2</a>
-                    <a>Link 3</a>
+                    <Link to='visualizer'>Path Finding Visualizer</Link>
+                    <Link to='2'>Link 2</Link>
+                    <Link to='3'>Link 3</Link>
                 </div>
             </nav>
         </div>
