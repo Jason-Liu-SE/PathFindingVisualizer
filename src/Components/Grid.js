@@ -7,8 +7,8 @@ const handleClick = (e) => {
     // checking if the target was a valid cell
     if (ValidCell.test(e.target.id)) {
         // changing the background colour of the cell, and the outline colour
-        e.target.style.backgroundColor = 'rgb(3, 202, 252)';
-        e.target.style.borderColor = 'rgba(3, 202, 252, 1)';
+        e.target.style.backgroundColor = 'rgb(89, 89, 89)';
+        e.target.style.borderColor = 'rgba(89, 89, 89, 1)';
     }
 };
 
@@ -22,6 +22,7 @@ const CreateGrid = (size) => {
     var rows = [];
     var rowCells = [];
 
+    // creating the grid of cells
     for (var row = 0; row < size; row++) {
         for (var col = 0; col < size; col++) {
             rowCells.push(
@@ -31,6 +32,7 @@ const CreateGrid = (size) => {
             );
         }
 
+        // creating a new row
         rows.push(
             <div className='cellRow' key={row}>
                 {rowCells}
