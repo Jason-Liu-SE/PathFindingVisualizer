@@ -1,11 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
+import useWindowDimensions from '../Hooks/useWindowDimensions';
 
 const ValidCell = new RegExp('^[0-9]+,[0-9]+$');
 const cellStates = []; // {id, state}. state: blocked || open
 
 const Grid = () => {
     const [isDragging, setIsDragging] = useState(false);
+    const { height, width } = useWindowDimensions();
+    const sizeX = width / 2 / 20;
+    const sizeY = (height * 256) / 324 / 20;
 
     const handleMouseHover = (e) => {
         if (isDragging) {
@@ -56,19 +60,14 @@ const Grid = () => {
         }
     };
 
-    const CreateGrid = (size) => {
-        if (typeof size !== 'number') {
-            return;
-        } else if (size <= 0) {
-            return;
-        }
-
+    const CreateGrid = () => {
+        // storing the cells
         var rows = [];
         var rowCells = [];
 
         // creating the grid of cells
-        for (var row = 0; row < size; row++) {
-            for (var col = 0; col < size; col++) {
+        for (var row = 0; row < sizeY; row++) {
+            for (var col = 0; col < sizeX; col++) {
                 const currCell = (
                     <div
                         id={row + ',' + col}
@@ -101,7 +100,7 @@ const Grid = () => {
         return <div className='cells'>{rows}</div>;
     };
 
-    return <div className='grid'>{CreateGrid(25)}</div>;
+    return <div className='grid'>{CreateGrid()}</div>;
 };
 
 export default Grid;

@@ -52,8 +52,8 @@ code {
 }
 
 .grid .cells .cellRow div {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     background-color: transparent;
     border: 1px solid rgba(200, 200, 200, 0.9);
 }
