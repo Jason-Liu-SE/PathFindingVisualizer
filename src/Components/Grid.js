@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useWindowDimensions from '../Hooks/useWindowDimensions';
 
 const ValidCell = new RegExp('^[0-9]+,[0-9]+$');
@@ -7,9 +7,14 @@ const cellStates = []; // {id, state}. state: blocked || open
 
 const Grid = () => {
     const [isDragging, setIsDragging] = useState(false);
+    const [sizeX, setSizeX] = useState(0);
+    const [sizeY, setSizeY] = useState(0);
     const { height, width } = useWindowDimensions();
-    const sizeX = width / 2 / 20;
-    const sizeY = (height * 256) / 324 / 20;
+
+    useEffect(() => {
+        setSizeX(width / 2 / 20);
+        setSizeY((height * 256) / 324 / 20);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleMouseHover = (e) => {
         if (isDragging) {
