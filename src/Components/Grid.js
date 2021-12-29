@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 
 const ValidCell = new RegExp('^[0-9]+,[0-9]+$');
+const cellStates = []; // {id, state}. state: blocked || open
 
 const Grid = () => {
     const [isDragging, setIsDragging] = useState(false);
@@ -12,12 +13,32 @@ const Grid = () => {
         }
     };
 
+    const findElementById = (arr, id) => {
+        return arr.find((elem) => {
+            return elem.id === id;
+        });
+    };
+
     const handleMouseClick = (e) => {
         // checking if the target was a valid cell
         if (ValidCell.test(e.currentTarget.id)) {
-            // changing the background colour of the cell, and the outline colour
-            e.currentTarget.style.backgroundColor = 'rgb(89, 89, 89)';
-            e.currentTarget.style.borderColor = 'rgba(89, 89, 89, 1)';
+            const elem = findElementById(cellStates, e.currentTarget.id);
+            console.log(elem);
+            // checking the state of the cell, then disabling or enabling the
+            // cell appropriately
+            if (elem.state === 'open') {
+                console.log('blocking');
+                e.currentTarget.style.backgroundColor = 'rgb(89, 89, 89)';
+                e.currentTarget.style.borderColor = 'rgba(89, 89, 89, 1)';
+
+                elem.state = 'blocked';
+            } else {
+                console.log('opening');
+                e.currentTarget.style.backgroundColor = 'rgb(255, 255, 255)';
+                e.currentTarget.style.borderColor = 'rgba(200, 200, 200, 0.9)';
+
+                elem.state = 'open';
+            }
         }
     };
 
@@ -48,7 +69,7 @@ const Grid = () => {
         // creating the grid of cells
         for (var row = 0; row < size; row++) {
             for (var col = 0; col < size; col++) {
-                rowCells.push(
+                const currCell = (
                     <div
                         id={row + ',' + col}
                         key={row + ',' + col}
@@ -60,6 +81,12 @@ const Grid = () => {
                         onMouseEnter={handleMouseHover}
                     ></div>
                 );
+
+                // storing a cell in a row
+                rowCells.push(currCell);
+
+                // storing the cell's state
+                cellStates.push({ id: row + ',' + col, state: 'open' });
             }
 
             // creating a new row
