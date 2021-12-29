@@ -57,3 +57,11 @@ code {
     background-color: transparent;
     border: 1px solid rgba(200, 200, 200, 0.9);
 }
+
+.visualizer {
+    display: flex;
+}
+
+.menu {
+    padding: 20px;
+}
