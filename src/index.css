@@ -47,11 +47,11 @@ code {
 }
 
 .grid .cells .cellRow {
-    height: 25px;
     vertical-align: top;
+    display: flex;
 }
 
-.grid .cells .cellRow button {
+.grid .cells .cellRow div {
     color: rgb(150, 150, 150);
     width: 25px;
     height: 25px;
