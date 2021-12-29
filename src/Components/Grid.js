@@ -4,6 +4,7 @@ import useWindowDimensions from '../Hooks/useWindowDimensions';
 
 const ValidCell = new RegExp('^[0-9]+,[0-9]+$');
 const cells = []; // {id, state}. state: blocked || open || start || end
+const cellSize = 20;
 
 const Grid = () => {
     const [isDragging, setIsDragging] = useState(false);
@@ -15,8 +16,8 @@ const Grid = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setSizeX(Math.floor(width / 2 / 20));
-        setSizeY(Math.floor((height * 256) / 324 / 20));
+        setSizeX(Math.floor(width / 2 / cellSize));
+        setSizeY(Math.floor((height * 256) / 324 / cellSize));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
@@ -113,6 +114,7 @@ const Grid = () => {
                 for (var col = 0; col < sizeX; col++) {
                     var backgroundColor = 'white';
                     var borderColor = 'rgba(200, 200, 200, 0.9)';
+                    // var isSpecial = false;
 
                     // storing the cell's state
                     const id = row + ',' + col;
@@ -123,10 +125,12 @@ const Grid = () => {
                         cell.state = 'start';
                         backgroundColor = 'rgb(3, 152, 252)';
                         borderColor = 'rgb(3, 152, 252)';
+                        // isSpecial = true;
                     } else if (id === endid) {
                         cell.state = 'end';
                         backgroundColor = 'rgb(252, 128, 3)';
                         borderColor = 'rgb(252, 128, 3)';
+                        // isSpecial = true;
                     }
 
                     // creating the new cell
