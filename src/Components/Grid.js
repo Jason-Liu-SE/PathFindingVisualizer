@@ -5,6 +5,9 @@ import useWindowDimensions from '../Hooks/useWindowDimensions';
 const ValidCell = new RegExp('^[0-9]+,[0-9]+$');
 const cells = []; // {id, state}. state: blocked || open || start || end
 const cellSize = 20;
+const backgroundColor = 'rgba(255, 255, 255, 1)';
+const borderColor = 'rgba(0, 0, 0, 0.3)';
+const blockedColor = 'rgb(50, 50, 50)';
 
 const Grid = () => {
     const [isDragging, setIsDragging] = useState(false);
@@ -70,13 +73,13 @@ const Grid = () => {
             // checking the state of the cell, then disabling or enabling the
             // cell appropriately
             if (elem.state === 'open') {
-                e.currentTarget.style.backgroundColor = 'rgb(89, 89, 89)';
-                e.currentTarget.style.borderColor = 'rgba(89, 89, 89, 1)';
+                e.currentTarget.style.backgroundColor = blockedColor;
+                e.currentTarget.style.borderColor = blockedColor;
 
                 elem.state = 'blocked';
             } else if (elem.state === 'blocked') {
-                e.currentTarget.style.backgroundColor = 'rgb(255, 255, 255)';
-                e.currentTarget.style.borderColor = 'rgba(200, 200, 200, 0.9)';
+                e.currentTarget.style.backgroundColor = backgroundColor;
+                e.currentTarget.style.borderColor = borderColor;
 
                 elem.state = 'open';
             }
@@ -112,8 +115,8 @@ const Grid = () => {
             // creating the grid of cells
             for (var row = 0; row < sizeY; row++) {
                 for (var col = 0; col < sizeX; col++) {
-                    var backgroundColor = 'white';
-                    var borderColor = 'rgba(200, 200, 200, 0.9)';
+                    var tBackgroundColor = backgroundColor;
+                    var tBorderColor = borderColor;
                     // var isSpecial = false;
 
                     // storing the cell's state
@@ -123,13 +126,13 @@ const Grid = () => {
                     // checking if the current cell is a special cell
                     if (id === startid) {
                         cell.state = 'start';
-                        backgroundColor = 'rgb(3, 152, 252)';
-                        borderColor = 'rgb(3, 152, 252)';
+                        tBackgroundColor = 'rgb(0, 150, 255)';
+                        tBorderColor = 'rgb(0, 150, 255)';
                         // isSpecial = true;
                     } else if (id === endid) {
                         cell.state = 'end';
-                        backgroundColor = 'rgb(252, 128, 3)';
-                        borderColor = 'rgb(252, 128, 3)';
+                        tBackgroundColor = 'rgb(252, 128, 3)';
+                        tBorderColor = 'rgb(252, 128, 3)';
                         // isSpecial = true;
                     }
 
@@ -144,7 +147,7 @@ const Grid = () => {
                             }}
                             onMouseUp={handleMouseUp}
                             onMouseEnter={handleMouseHover}
-                            style={{ backgroundColor: backgroundColor, borderColor: borderColor }}
+                            style={{ backgroundColor: tBackgroundColor, borderColor: tBorderColor }}
                         ></div>
                     );
 

@@ -15,11 +15,27 @@ code {
     color: rgb(27, 27, 27);
 }
 
+html,
+body,
+#root,
+.App {
+    height: 100%;
+}
+
+.App {
+    display: flex;
+    flex-flow: column;
+}
+
+.App .content {
+    flex-grow: 1;
+}
+
 .navBar {
     padding: 20px;
     display: flex;
     align-items: center;
-    box-shadow: 0px 0px 15px 1px rgb(87, 87, 87);
+    box-shadow: inset 0px 0px 12px 1px rgb(87, 87, 87);
 }
 
 .navBar h1 a {
@@ -49,19 +65,47 @@ code {
 .grid .cells .cellRow {
     vertical-align: top;
     display: flex;
+    box-shadow: -6px 5px 14px 2px rgba(0, 0, 0, 0.5);
 }
 
 .grid .cells .cellRow div {
     width: 20px;
     height: 20px;
-    background-color: transparent;
     border: 1px solid rgba(200, 200, 200, 0.9);
 }
 
 .visualizer {
     display: flex;
+    /* background-image: url('./Images/background.jpg'); */
+    background: rgb(0, 104, 255);
+    background: linear-gradient(220deg, rgba(0, 104, 255, 1) 0%, rgba(0, 70, 171, 1) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
 }
 
 .menu {
-    padding: 20px;
+    margin: 20px 20px 20px 20px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    box-shadow: -6px 5px 14px 2px rgba(0, 0, 0, 0.5);
+}
+
+.menu .title {
+    color: rgb(45, 45, 45);
+    text-align: center;
+    margin: 15px;
+}
+
+.menu .options {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu .options button {
+    margin-bottom: 10px;
 }
