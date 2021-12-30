@@ -6,6 +6,7 @@ const Menu = () => {
     const [selectedAlgorithm, setAlgorithm] = useState('none');
     const [isResetting, setIsResetting] = useState(false);
     const [isRunning, setIsRunning] = useState(false);
+    const [isClearing, setIsClearing] = useState(false);
 
     useEffect(() => {
         var timer;
@@ -29,14 +30,36 @@ const Menu = () => {
         return () => clearTimeout(timer);
     }, [isRunning]);
 
+    useEffect(() => {
+        var timer;
+        if (isClearing) {
+            timer = setTimeout(() => {
+                console.log('Cleared');
+                setIsClearing(false);
+            }, 500);
+        }
+        return () => clearTimeout(timer);
+    }, [isClearing]);
+
     const handleReset = () => {
-        console.log('Resetting');
-        setIsResetting(true);
+        if (!isResetting) {
+            console.log('Resetting');
+            setIsResetting(true);
+        }
     };
 
     const handleStart = () => {
-        console.log('Starting...');
-        setIsRunning(true);
+        if (!isRunning) {
+            console.log('Starting...');
+            setIsRunning(true);
+        }
+    };
+
+    const handleClear = () => {
+        if (!isClearing) {
+            console.log('Clearing');
+            setIsClearing(true);
+        }
     };
 
     return (
@@ -53,18 +76,6 @@ const Menu = () => {
                         <div>Start</div>
                         <div>End</div>
                     </div>
-                    {/* <table className='legend'>
-                        <tbody>
-                            <tr>
-                                <td>Wall</td>
-                                <td>Path</td>
-                            </tr>
-                            <tr>
-                                <td>Start</td>
-                                <td>End</td>
-                            </tr>
-                        </tbody>
-                    </table> */}
                 </div>
                 <div className='start'>
                     <button onClick={handleStart}>Start</button>
@@ -79,6 +90,9 @@ const Menu = () => {
                             <input type='text' name='delay' />
                         </label>
                     </form>
+                </div>
+                <div className='clear'>
+                    <button onClick={handleClear}>Clear</button>
                 </div>
                 <div className='reset'>
                     <button onClick={handleReset}>Reset</button>
