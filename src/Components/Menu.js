@@ -1,5 +1,24 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Slider } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
+import { createTheme } from '@material-ui/core/styles';
+
+const muiTheme = createTheme({
+    overrides: {
+        MuiSlider: {
+            thumb: {
+                color: '#00a2ff',
+            },
+            track: {
+                color: '#00a2ff',
+            },
+            rail: {
+                color: 'black',
+            },
+        },
+    },
+});
 
 const Menu = () => {
     const [delay, setDelay] = useState(10);
@@ -7,6 +26,7 @@ const Menu = () => {
     const [isResetting, setIsResetting] = useState(false);
     const [isRunning, setIsRunning] = useState(false);
     const [isClearing, setIsClearing] = useState(false);
+    const numbers = new RegExp('^[0-9]*$');
 
     useEffect(() => {
         var timer;
@@ -62,6 +82,15 @@ const Menu = () => {
         }
     };
 
+    const handleDelayChange = (e) => {
+        if (e.target.value === '') e.target.value = 0;
+        if (numbers.test(e.target.value) && e.target.value <= 1000) setDelay(parseInt(e.target.value));
+    };
+
+    const handleSliderChange = (e, data) => {
+        setDelay(data);
+    };
+
     return (
         <div className='menu'>
             <h1 className='title'>Menu</h1>
@@ -71,10 +100,24 @@ const Menu = () => {
                         Choose an algorithm and press <b>start</b> to visualize it!
                     </h3>
                     <div className='legend'>
-                        <div>Wall</div>
-                        <div>Path</div>
-                        <div>Start</div>
-                        <div>End</div>
+                        <div>
+                            Wall<div className='wall'></div>
+                        </div>
+                        <div>
+                            Path<div className='path'></div>
+                        </div>
+                        <div>
+                            Start<div className='start'>X</div>
+                        </div>
+                        <div>
+                            End<div className='end'>O</div>
+                        </div>
+                        <div>
+                            Visited<div className='visited'></div>
+                        </div>
+                        <div>
+                            Next Cell<div className='next'></div>
+                        </div>
                     </div>
                 </div>
                 <div className='start'>
@@ -87,7 +130,18 @@ const Menu = () => {
                     <form>
                         <label>
                             <h3>Delay</h3>
-                            <input type='text' name='delay' />
+                            <ThemeProvider theme={muiTheme}>
+                                <Slider
+                                    step={1}
+                                    min={0}
+                                    max={1000}
+                                    defaultValue={100}
+                                    value={delay}
+                                    onChange={handleSliderChange}
+                                />
+                            </ThemeProvider>
+                            <input type='text' name='delay' maxLength='4' value={delay} onChange={handleDelayChange} />
+                            ms
                         </label>
                     </form>
                 </div>

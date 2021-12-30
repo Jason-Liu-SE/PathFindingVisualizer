@@ -117,6 +117,7 @@ const Grid = () => {
                 for (var col = 0; col < sizeX; col++) {
                     var tBackgroundColor = backgroundColor;
                     var tBorderColor = borderColor;
+                    var value = '';
                     // var isSpecial = false;
 
                     // storing the cell's state
@@ -128,11 +129,13 @@ const Grid = () => {
                         cell.state = 'start';
                         tBackgroundColor = 'rgb(0, 150, 255)';
                         tBorderColor = 'rgb(0, 150, 255)';
+                        value = 'X';
                         // isSpecial = true;
                     } else if (id === endid) {
                         cell.state = 'end';
                         tBackgroundColor = 'rgb(252, 128, 3)';
                         tBorderColor = 'rgb(252, 128, 3)';
+                        value = 'O';
                         // isSpecial = true;
                     }
 
@@ -148,7 +151,9 @@ const Grid = () => {
                             onMouseUp={handleMouseUp}
                             onMouseEnter={handleMouseHover}
                             style={{ backgroundColor: tBackgroundColor, borderColor: tBorderColor }}
-                        ></div>
+                        >
+                            {value}
+                        </div>
                     );
 
                     // storing a cell in a row
