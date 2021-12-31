@@ -1,32 +1,18 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Slider } from '@material-ui/core';
-import { ThemeProvider } from '@material-ui/styles';
-import { createTheme } from '@material-ui/core/styles';
+import { Menu, MenuItem, Slider } from '@mui/material';
+import { BsChevronDown } from 'react-icons/bs';
 
-const muiTheme = createTheme({
-    overrides: {
-        MuiSlider: {
-            thumb: {
-                color: '#00a2ff',
-            },
-            track: {
-                color: '#00a2ff',
-            },
-            rail: {
-                color: 'black',
-            },
-        },
-    },
-});
-
-const Menu = () => {
-    const [delay, setDelay] = useState(10);
-    const [selectedAlgorithm, setAlgorithm] = useState('none');
+const OptionMenu = () => {
+    const [delay, setDelay] = useState(50);
+    const [selectedAlgorithm, setAlgorithm] = useState('A Star');
     const [isResetting, setIsResetting] = useState(false);
     const [isRunning, setIsRunning] = useState(false);
     const [isClearing, setIsClearing] = useState(false);
     const numbers = new RegExp('^[0-9]*$');
+    const [anchor, setAnchor] = useState(null);
+    const isAlgoMenuOpen = Boolean(anchor);
+    const [width, setWidth] = useState('0px');
 
     useEffect(() => {
         var timer;
@@ -91,13 +77,22 @@ const Menu = () => {
         setDelay(data);
     };
 
+    const handleAlgorithmClose = () => {
+        setAnchor(null);
+    };
+
+    const handleAlgorithmOpen = (e) => {
+        setWidth(e.currentTarget.clientWidth + 'px');
+        setAnchor(e.currentTarget);
+    };
+
     return (
         <div className='menu'>
             <h1 className='title'>Menu</h1>
             <div className='options'>
                 <div className='description'>
                     <h3>
-                        Choose an algorithm and press <b>start</b> to visualize it!
+                        Press <strong>start</strong> to visualize the <b>{selectedAlgorithm}</b> algorithm!
                     </h3>
                     <div className='legend'>
                         <div>
@@ -124,22 +119,54 @@ const Menu = () => {
                     <button onClick={handleStart}>Start</button>
                 </div>
                 <div className='algorithms'>
-                    <button>Algorithms</button>
+                    <button onClick={handleAlgorithmOpen}>
+                        Algorithms
+                        <BsChevronDown style={{ marginLeft: '4px' }} />
+                    </button>
+                    <Menu
+                        anchorEl={anchor}
+                        open={isAlgoMenuOpen}
+                        onClose={handleAlgorithmClose}
+                        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                        PaperProps={{
+                            style: {
+                                width: width,
+                            },
+                        }}
+                    >
+                        <MenuItem
+                            onClick={() => {
+                                setAlgorithm('A Star');
+                                handleAlgorithmClose();
+                            }}
+                        >
+                            A Star
+                        </MenuItem>
+                        <MenuItem
+                            onClick={() => {
+                                setAlgorithm('Greedy First Search');
+                                handleAlgorithmClose();
+                            }}
+                        >
+                            Greedy First Search
+                        </MenuItem>
+                    </Menu>
                 </div>
                 <div className='delay'>
                     <form>
                         <label>
                             <h3>Delay</h3>
-                            <ThemeProvider theme={muiTheme}>
-                                <Slider
-                                    step={1}
-                                    min={0}
-                                    max={1000}
-                                    defaultValue={100}
-                                    value={delay}
-                                    onChange={handleSliderChange}
-                                />
-                            </ThemeProvider>
+                            <Slider
+                                className='slider'
+                                step={1}
+                                min={0}
+                                max={1000}
+                                defaultValue={100}
+                                value={delay}
+                                onChange={handleSliderChange}
+                                size={'medium'}
+                            />
                             <input type='text' name='delay' maxLength='4' value={delay} onChange={handleDelayChange} />
                             ms
                         </label>
@@ -157,4 +184,4 @@ const Menu = () => {
     );
 };
 
-export default Menu;
+export default OptionMenu;

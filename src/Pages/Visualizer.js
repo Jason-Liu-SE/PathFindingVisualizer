@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '../Components/Grid.js';
-import Menu from '../Components/Menu.js';
+import Menu from '../Components/OptionMenu.js';
 
 const Visualizer = () => {
     return (

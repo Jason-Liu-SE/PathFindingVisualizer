@@ -5,7 +5,7 @@ import useWindowDimensions from '../Hooks/useWindowDimensions';
 const ValidCell = new RegExp('^[0-9]+,[0-9]+$');
 const cells = []; // {id, state}. state: blocked || open || start || end
 const cellSize = 20;
-const backgroundColor = 'rgba(255, 255, 255, 1)';
+const backgroundColor = 'rgba(255, 255, 255, 0.5)';
 const borderColor = 'rgba(0, 0, 0, 0.3)';
 const blockedColor = 'rgb(50, 50, 50)';
 
