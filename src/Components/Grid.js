@@ -196,6 +196,7 @@ const Grid = React.forwardRef((props, ref) => {
                     // creating the new cell
                     var currCell = (
                         <div
+                            className='cell'
                             id={id}
                             key={id}
                             onMouseDown={(e) => {
