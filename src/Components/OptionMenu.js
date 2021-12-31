@@ -3,26 +3,35 @@ import { useState, useEffect } from 'react';
 import { Menu, MenuItem, Slider } from '@mui/material';
 import { BsChevronDown } from 'react-icons/bs';
 
-const OptionMenu = () => {
-    const [delay, setDelay] = useState(50);
-    const [selectedAlgorithm, setAlgorithm] = useState('A Star');
+const OptionMenu = (props) => {
+    const updateAlgorithm = props.updateAlgorithm;
+    const updateDelay = props.updateDelay;
+    const numbers = new RegExp('^[0-9]*$');
+
+    const [delay, setDelay] = useState(props.delay);
+    const [selectedAlgorithm, setAlgorithm] = useState(props.selectedAlgorithm);
+
     const [isResetting, setIsResetting] = useState(false);
     const [isRunning, setIsRunning] = useState(false);
-    const [isClearing, setIsClearing] = useState(false);
-    const numbers = new RegExp('^[0-9]*$');
+    // const [isClearing, setIsClearing] = useState(false);
     const [anchor, setAnchor] = useState(null);
     const isAlgoMenuOpen = Boolean(anchor);
     const [width, setWidth] = useState('0px');
 
     useEffect(() => {
-        var timer;
+        updateDelay(delay);
+    }, [updateDelay, delay]);
+
+    useEffect(() => {
+        updateAlgorithm(selectedAlgorithm);
+    }, [selectedAlgorithm, updateAlgorithm]);
+
+    useEffect(() => {
         if (isResetting) {
-            timer = setTimeout(() => {
-                console.log('done resetting');
-                setIsResetting(false);
-            }, 500);
+            setIsResetting(false);
         }
-        return () => clearTimeout(timer);
+
+        return;
     }, [isResetting]);
 
     useEffect(() => {
@@ -36,22 +45,22 @@ const OptionMenu = () => {
         return () => clearTimeout(timer);
     }, [isRunning]);
 
-    useEffect(() => {
-        var timer;
-        if (isClearing) {
-            timer = setTimeout(() => {
-                console.log('Cleared');
-                setIsClearing(false);
-            }, 500);
-        }
-        return () => clearTimeout(timer);
-    }, [isClearing]);
+    // useEffect(() => {
+    //     var timer;
+    //     if (isClearing) {
+    //         timer = setTimeout(() => {
+    //             console.log('Cleared');
+    //             setIsClearing(false);
+    //         }, 500);
+    //     }
+    //     return () => clearTimeout(timer);
+    // }, [isClearing]);
 
     const handleReset = () => {
-        if (!isResetting) {
-            console.log('Resetting');
-            setIsResetting(true);
-        }
+        // if (!isResetting) {
+        //     console.log('Resetting');
+        // }
+        props.resetGrid();
     };
 
     const handleStart = () => {
@@ -62,10 +71,11 @@ const OptionMenu = () => {
     };
 
     const handleClear = () => {
-        if (!isClearing) {
-            console.log('Clearing');
-            setIsClearing(true);
-        }
+        // if (!isClearing) {
+        //     console.log('Clearing');
+        //     setIsClearing(true);
+        // }
+        props.clearGrid();
     };
 
     const handleDelayChange = (e) => {
@@ -145,11 +155,11 @@ const OptionMenu = () => {
                         </MenuItem>
                         <MenuItem
                             onClick={() => {
-                                setAlgorithm('Greedy First Search');
+                                setAlgorithm('Greedy Best First Search');
                                 handleAlgorithmClose();
                             }}
                         >
-                            Greedy First Search
+                            Greedy Best First Search
                         </MenuItem>
                     </Menu>
                 </div>
