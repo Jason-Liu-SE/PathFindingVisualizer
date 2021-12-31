@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Grid from '../Components/Grid.js';
 import Menu from '../Components/OptionMenu.js';
+import AStar from '../Algorithms/AStar';
+import Greedy from '../Algorithms/Greedy';
 
 const Visualizer = () => {
     var delay = 50;
@@ -26,6 +28,12 @@ const Visualizer = () => {
         gridRef.current.reset();
     };
 
+    const visualize = (algorithm) => {
+        if (algorithm === 'A Star') {
+        } else if (algorithm === 'Greedy Best First Search') {
+        }
+    };
+
     return (
         <div className='visualizer'>
             <Grid cells={cells} setCells={setCells} ref={gridRef} />
@@ -36,6 +44,7 @@ const Visualizer = () => {
                 updateAlgorithm={updateAlgorithm}
                 clearGrid={clearGrid}
                 resetGrid={resetGrid}
+                visualize={visualize}
             />
         </div>
     );

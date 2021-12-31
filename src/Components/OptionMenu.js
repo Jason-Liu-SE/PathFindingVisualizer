@@ -35,14 +35,18 @@ const OptionMenu = (props) => {
     }, [isResetting]);
 
     useEffect(() => {
-        var timer;
+        // var timer;
+        // if (isRunning) {
+        //     timer = setTimeout(() => {
+        //         console.log('algorithm finished');
+        //         setIsRunning(false);
+        //     }, 500);
+        // }
+        // return () => clearTimeout(timer);
         if (isRunning) {
-            timer = setTimeout(() => {
-                console.log('algorithm finished');
-                setIsRunning(false);
-            }, 500);
+            props.visualize(selectedAlgorithm);
+            setIsRunning(false);
         }
-        return () => clearTimeout(timer);
     }, [isRunning]);
 
     // useEffect(() => {
@@ -80,7 +84,10 @@ const OptionMenu = (props) => {
 
     const handleDelayChange = (e) => {
         if (e.target.value === '') e.target.value = 0;
-        if (numbers.test(e.target.value) && e.target.value <= 1000) setDelay(parseInt(e.target.value));
+        if (numbers.test(e.target.value)) {
+            if (e.target.value > 1000) e.target.value = 1000;
+            setDelay(parseInt(e.target.value));
+        }
     };
 
     const handleSliderChange = (e, data) => {
@@ -164,7 +171,11 @@ const OptionMenu = (props) => {
                     </Menu>
                 </div>
                 <div className='delay'>
-                    <form>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                        }}
+                    >
                         <label>
                             <h3>Delay</h3>
                             <Slider

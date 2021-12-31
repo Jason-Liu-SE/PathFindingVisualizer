@@ -159,21 +159,23 @@ body,
 
 .menu .options .reset button:hover {
     background-color: rgba(252, 3, 61, 1);
+    color: white;
     transition: 0.03s;
 }
 
 .menu .options .start button:hover {
-    background-color: rgb(136, 252, 3);
+    background-color: rgb(186, 252, 3);
     transition: 0.03s;
 }
 
 .menu .options .algorithms button:hover {
-    background-color: rgb(252, 173, 3);
+    background-color: rgb(252, 136, 3);
     transition: 0.03s;
 }
 
 .menu .options .clear button:hover {
     background-color: rgb(155, 47, 255);
+    color: white;
     transition: 0.03s;
 }
 
