@@ -141,26 +141,25 @@ async function run(nodes, size, render, setFinished, delay) {
 
             if (node.state !== 'start' && node.state !== 'end') getNode(nodes, node.x, node.y).state = 'next';
 
+            node.g = curr.g + 1;
+            node.h = getManhattanDist(node, target);
+            node.f = node.g + node.h;
+            node.parent = curr;
+
             // checking if the node has or has not been visited yet
             openNode = open.find((elem) => {
                 return elem.id === node.id ? elem : null;
             });
 
-            // not visited
-            if (!openNode) {
-                node.parent = curr;
-                node.h = getManhattanDist(node, target);
-                node.g = curr.g + 1;
-                node.f = node.g + node.h;
-                open.push(node);
-            } else if (openNode) {
-                // visited
-                if (openNode.g > node.g) {
-                    openNode.parent = node;
-                    openNode.g = node.g + 1;
-                    openNode.f = openNode.g + openNode.h;
+            if (openNode) {
+                if (node.g > openNode.g) {
+                    continue;
+                } else {
+                    open.splice(open.indexOf(openNode), 1);
                 }
             }
+
+            open.push(node);
 
             // updating nodes
             getNode(nodes, node.x, node.y).h = node.h;
@@ -178,8 +177,6 @@ async function run(nodes, size, render, setFinished, delay) {
 
     render(nodes);
     setFinished();
-
-    console.log(nodes);
 }
 
 exports.run = run;
