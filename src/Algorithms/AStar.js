@@ -141,29 +141,24 @@ async function run(nodes, size, render, setFinished, delay) {
 
             if (node.state !== 'start' && node.state !== 'end') getNode(nodes, node.x, node.y).state = 'next';
 
-            // setting the parent of node
-            node.parent = curr;
-
-            // calculating the node's g, h, and f values
-            node.g = curr.g + 1;
-            node.h = getManhattanDist(node, target);
-            node.f = node.g + node.h;
-
-            // checking if the node is already in the open list
+            // checking if the node has or has not been visited yet
             openNode = open.find((elem) => {
                 return elem.id === node.id ? elem : null;
             });
 
-            // checking the openNode
+            // not visited
             if (!openNode) {
-                // node is not in the open list
+                node.parent = curr;
+                node.h = getManhattanDist(node, target);
+                node.g = curr.g + 1;
+                node.f = node.g + node.h;
                 open.push(node);
-            } else {
-                // node is already in the open list
-                if (node.g < openNode.g) {
-                    openNode.g = node.g;
-                    openNode.f = node.f;
-                    openNode.parent = node.parent;
+            } else if (openNode) {
+                // visited
+                if (openNode.g > node.g) {
+                    openNode.parent = node;
+                    openNode.g = node.g + 1;
+                    openNode.f = openNode.g + openNode.h;
                 }
             }
 

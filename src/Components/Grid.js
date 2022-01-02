@@ -13,7 +13,7 @@ const pathColor = 'rgba(130, 252, 16, 0.9)';
 const endColor = 'rgb(252, 128, 3)';
 const startColor = 'rgb(0, 150, 255)';
 const visitedColor = 'rgba(131, 131, 131, 0.8)';
-const nextCellColor = 'rgba(120, 120,250, 0.7)';
+const nextCellColor = 'rgba(252, 3, 78, 1)';
 const currentCellColor = '#fffb00';
 
 const Grid = React.forwardRef((props, ref) => {
@@ -162,7 +162,7 @@ const Grid = React.forwardRef((props, ref) => {
 
             if (!node) continue;
 
-            if (child.f > 0) node.innerHTML = child.f;
+            // if (child.f > 0) node.innerHTML = child.f;
 
             // changing the corresponding cell background
             if (child.state === 'start') {
