@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Menu, MenuItem, Slider } from '@mui/material';
 import { BsChevronDown } from 'react-icons/bs';
 
-const OptionMenu = (props) => {
+const OptionMenu = React.forwardRef((props, ref) => {
     const updateAlgorithm = props.updateAlgorithm;
     const updateDelay = props.updateDelay;
     const numbers = new RegExp('^[0-9]*$');
@@ -45,9 +45,8 @@ const OptionMenu = (props) => {
         // return () => clearTimeout(timer);
         if (isRunning) {
             props.visualize(selectedAlgorithm);
-            setIsRunning(false);
         }
-    }, [isRunning]);
+    }, [isRunning, props, selectedAlgorithm]);
 
     // useEffect(() => {
     //     var timer;
@@ -69,7 +68,6 @@ const OptionMenu = (props) => {
 
     const handleStart = () => {
         if (!isRunning) {
-            console.log('Starting...');
             setIsRunning(true);
         }
     };
@@ -103,6 +101,19 @@ const OptionMenu = (props) => {
         setAnchor(e.currentTarget);
     };
 
+    const getExplanations = () => {
+        if (selectedAlgorithm === 'A Star')
+            return 'A* finds the shortest path to a node with the lowest cost (distance traveled) while considering a weighted graph.';
+        else if (selectedAlgorithm === 'Greedy Best First Search')
+            return 'Greedy Best First Search attempts to find the shortest path to a node by selecting the option which reduces the immediate distance to the node.';
+    };
+
+    React.useImperativeHandle(ref, () => ({
+        setFinished() {
+            setIsRunning(false);
+        },
+    }));
+
     return (
         <div className='menu'>
             <h1 className='title'>Menu</h1>
@@ -130,13 +141,18 @@ const OptionMenu = (props) => {
                         <div>
                             Next Cell<div className='next'></div>
                         </div>
+                        <div>
+                            Current Cell<div className='current'></div>
+                        </div>
                     </div>
                 </div>
                 <div className='start'>
-                    <button onClick={handleStart}>Start</button>
+                    <button onClick={handleStart} disabled={isRunning}>
+                        Start
+                    </button>
                 </div>
                 <div className='algorithms'>
-                    <button onClick={handleAlgorithmOpen}>
+                    <button onClick={handleAlgorithmOpen} disabled={isRunning}>
                         Algorithms
                         <BsChevronDown style={{ marginLeft: '4px' }} />
                     </button>
@@ -166,7 +182,7 @@ const OptionMenu = (props) => {
                                 handleAlgorithmClose();
                             }}
                         >
-                            Greedy Best First Search
+                            Greedy Best First Search (WIP)
                         </MenuItem>
                     </Menu>
                 </div>
@@ -187,22 +203,36 @@ const OptionMenu = (props) => {
                                 value={delay}
                                 onChange={handleSliderChange}
                                 size={'medium'}
+                                disabled={isRunning}
                             />
-                            <input type='text' name='delay' maxLength='4' value={delay} onChange={handleDelayChange} />
+                            <input
+                                type='text'
+                                name='delay'
+                                maxLength='4'
+                                value={delay}
+                                onChange={handleDelayChange}
+                                disabled={isRunning}
+                            />
                             ms
                         </label>
                     </form>
                 </div>
                 <div className='clear'>
-                    <button onClick={handleClear}>Clear</button>
+                    <button onClick={handleClear} disabled={isRunning}>
+                        Clear
+                    </button>
                 </div>
                 <div className='reset'>
-                    <button onClick={handleReset}>Reset</button>
+                    <button onClick={handleReset} disabled={isRunning}>
+                        Reset
+                    </button>
                 </div>
-                <div className='explanations'>{<h3>Some text to explain how the chosen algorithm works</h3>}</div>
+                <div className='explanations'>
+                    <h3>{getExplanations()}</h3>
+                </div>
             </div>
         </div>
     );
-};
+});
 
 export default OptionMenu;

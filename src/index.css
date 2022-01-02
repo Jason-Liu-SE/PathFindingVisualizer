@@ -148,7 +148,11 @@ body,
     justify-content: center;
 }
 
-.menu .options div button:hover {
+.menu .options div button:disabled {
+    filter: brightness(0.5);
+}
+
+.menu .options div button:hover:enabled {
     font-weight: bolder;
     box-shadow: -6px 6px 12px 1px rgba(0, 0, 0, 0.5);
     position: relative;
@@ -157,29 +161,35 @@ body,
     transition: 0.03s;
 }
 
-.menu .options .reset button:hover {
-    background-color: rgba(252, 3, 61, 1);
-    color: white;
+.menu .options .reset button:hover:enabled {
+    /* background-color: rgba(252, 3, 61, 1); */
+    background-color: rgb(0, 183, 255);
+    /* color: white; */
     transition: 0.03s;
 }
 
-.menu .options .start button:hover {
-    background-color: rgb(186, 252, 3);
+.menu .options .start button:hover:enabled {
+    /* background-color: rgb(186, 252, 3); */
+    background-color: rgb(0, 183, 255);
+    box-shadow: -8px 8px 12px 1px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px) translateX(3px);
     transition: 0.03s;
 }
 
-.menu .options .algorithms button:hover {
-    background-color: rgb(252, 136, 3);
+.menu .options .algorithms button:hover:enabled {
+    /* background-color: rgb(252, 136, 3); */
+    background-color: rgb(0, 183, 255);
     transition: 0.03s;
 }
 
-.menu .options .clear button:hover {
-    background-color: rgb(155, 47, 255);
-    color: white;
+.menu .options .clear button:hover:enabled {
+    /* background-color: rgb(155, 47, 255); */
+    background-color: rgb(0, 183, 255);
+    /* color: white; */
     transition: 0.03s;
 }
 
-.menu .options div button:active {
+.menu .options div button:active:enabled {
     filter: brightness(0.8);
     box-shadow: -3px 3px 6px 1px rgba(0, 0, 0, 0.5);
     transform: translateY(-1px) translateX(1px);
@@ -212,6 +222,17 @@ body,
 .menu .options .delay .slider .MuiSlider-track,
 .menu .options .delay .slider .MuiTypography-root {
     color: rgb(0, 183, 255);
+}
+
+.menu .options .delay .slider .MuiSlider-thumb.Mui-disabled,
+.menu .options .delay .slider .MuiSlider-rail.Mui-disabled,
+.menu .options .delay .slider .MuiSlider-track.Mui-disabled,
+.menu .options .delay .slider .MuiTypography-root.Mui-disabled {
+    color: rgb(45, 45, 45);
+}
+
+.menu .options .delay form label input:disabled {
+    filter: brightness(0.5);
 }
 
 .menu .options .description .legend {
@@ -268,4 +289,13 @@ body,
 
 .menu .options .description .legend div .next {
     background-color: rgb(0, 38, 255);
+}
+
+.menu .options .description .legend div .current {
+    background-color: #fffb00;
+}
+
+.menu .options .explanations h3 {
+    font-weight: 500;
+    text-align: left;
 }

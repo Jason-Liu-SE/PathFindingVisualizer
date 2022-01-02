@@ -1,5 +1,5 @@
-const Greedy = () => {
-    return <div>Greedy Best First Search</div>;
+const print = () => {
+    console.log('Greedy Algorithm');
 };
 
-export default Greedy;
+exports.print = print;
