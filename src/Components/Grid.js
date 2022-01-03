@@ -9,12 +9,12 @@ const backgroundColor = 'rgba(255, 255, 255, 0.5)';
 const borderColor = 'rgba(0, 0, 0, 0.3)';
 
 const blockedColor = 'rgb(50, 50, 50)';
-const pathColor = 'rgba(130, 252, 16, 0.9)';
-const endColor = 'rgb(252, 128, 3)';
-const startColor = 'rgb(0, 150, 255)';
-const visitedColor = 'rgba(131, 131, 131, 0.8)';
-const nextCellColor = 'rgba(252, 3, 78, 1)';
-const currentCellColor = '#fffb00';
+const pathColor = 'rgba(255, 166, 48, 0.8)';
+const endColor = 'rgb(241, 119, 32)';
+const startColor = 'rgb(0, 167, 225)';
+const visitedColor = 'rgba(235, 235, 235, 0.35)';
+const nextCellColor = 'rgba(4, 116, 186, 0.5)';
+const currentCellColor = 'rgb(255, 0, 94)';
 
 const Grid = React.forwardRef((props, ref) => {
     const [isDragging, setIsDragging] = useState(false);

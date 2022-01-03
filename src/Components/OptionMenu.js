@@ -127,19 +127,19 @@ const OptionMenu = React.forwardRef((props, ref) => {
                             Wall<div className='wall'></div>
                         </div>
                         <div>
-                            Path<div className='path'></div>
+                            Next Cell<div className='next'></div>
                         </div>
                         <div>
                             Start<div className='start'>X</div>
                         </div>
                         <div>
-                            End<div className='end'>O</div>
-                        </div>
-                        <div>
                             Visited<div className='visited'></div>
                         </div>
                         <div>
-                            Next Cell<div className='next'></div>
+                            Path<div className='path'></div>
+                        </div>
+                        <div>
+                            End<div className='end'>O</div>
                         </div>
                         <div>
                             Current Cell<div className='current'></div>
