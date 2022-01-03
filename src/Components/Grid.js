@@ -30,6 +30,8 @@ const Grid = React.forwardRef((props, ref) => {
     const setCells = props.setCells;
     const setSize = props.setSize;
 
+    let isAlgoRunning = false;
+
     useEffect(() => {
         setSizeX(Math.floor(width / 2 / cellSize));
         setSizeY(Math.floor((height * 256) / 324 / cellSize));
@@ -69,12 +71,6 @@ const Grid = React.forwardRef((props, ref) => {
         return Math.floor(Math.random() * max);
     };
 
-    const handleMouseHover = (e) => {
-        if (isDragging) {
-            handleMouseClick(e);
-        }
-    };
-
     const findStateElementById = (arr, id) => {
         if (!ValidCell.test(id)) {
             console.log('Invalid id <' + id + '> in findStateElementById');
@@ -88,7 +84,7 @@ const Grid = React.forwardRef((props, ref) => {
 
     const handleMouseClick = (e) => {
         // checking if the target was a valid cell
-        if (ValidCell.test(e.currentTarget.id)) {
+        if (!isAlgoRunning && ValidCell.test(e.currentTarget.id)) {
             const elem = findStateElementById(cells, e.currentTarget.id);
             // checking the state of the cell, then disabling or enabling the
             // cell appropriately
@@ -109,14 +105,20 @@ const Grid = React.forwardRef((props, ref) => {
     const handleMouseDown = (e) => {
         e.preventDefault();
 
-        if (!isDragging) {
+        if (!isAlgoRunning && !isDragging) {
             setIsDragging(true);
         }
     };
 
     const handleMouseUp = () => {
-        if (isDragging) {
+        if (!isAlgoRunning && isDragging) {
             setIsDragging(false);
+        }
+    };
+
+    const handleMouseHover = (e) => {
+        if (!isAlgoRunning && isDragging) {
+            handleMouseClick(e);
         }
     };
 
@@ -162,8 +164,6 @@ const Grid = React.forwardRef((props, ref) => {
 
             if (!node) continue;
 
-            // if (child.f > 0) node.innerHTML = child.f;
-
             // changing the corresponding cell background
             if (child.state === 'start') {
                 node.style.backgroundColor = startColor;
@@ -207,6 +207,9 @@ const Grid = React.forwardRef((props, ref) => {
         },
         render(nodes) {
             updateCells(nodes);
+        },
+        setAlgoRunning(running) {
+            isAlgoRunning = running;
         },
     }));
 

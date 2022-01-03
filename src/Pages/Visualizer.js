@@ -35,9 +35,15 @@ const Visualizer = () => {
         size.y = y;
     };
 
+    const setFinished = () => {
+        gridRef.current.setAlgoRunning(false);
+        menuRef.current.setFinished();
+    };
+
     const visualize = (algorithm) => {
         if (algorithm === 'A Star') {
-            AStar.run(JSON.parse(JSON.stringify(cells)), size, gridRef.current.render, menuRef.current.setFinished, delay);
+            gridRef.current.setAlgoRunning(true);
+            AStar.run(JSON.parse(JSON.stringify(cells)), size, gridRef.current.render, setFinished, delay);
         } else if (algorithm === 'Greedy Best First Search') {
             Greedy.print();
         }
