@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar.js';
 import Visualizer from './Pages/Visualizer.js';
 
 function App() {
+    useEffect(() => {
+        document.title = 'Path Visualizer';
+    }, []);
+
     return (
         <div className='App'>
             <div className='fixedContent'>
