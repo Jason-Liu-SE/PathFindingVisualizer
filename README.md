@@ -1,1 +1,1 @@
-The link 5o the visualizer: https://jason-liu-se.github.io/PathFindingVisualizer/
+The link to the visualizer: https://jason-liu-se.github.io/PathFindingVisualizer/
