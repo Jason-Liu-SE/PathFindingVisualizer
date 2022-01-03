@@ -2,11 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import Grid from '../Components/Grid.js';
 import Menu from '../Components/OptionMenu.js';
+import AStar from '../Algorithms/AStar';
+import Greedy from '../Algorithms/Greedy';
 
 const Visualizer = () => {
-    const AStar = require('../Algorithms/AStar');
-    const Greedy = require('../Algorithms/Greedy');
-
     let delay = 20;
     let size = { x: 0, y: 0 };
     let selectedAlgorithm = 'A Star';
@@ -43,9 +42,9 @@ const Visualizer = () => {
     const visualize = (algorithm) => {
         if (algorithm === 'A Star') {
             gridRef.current.setAlgoRunning(true);
-            AStar.run(JSON.parse(JSON.stringify(cells)), size, gridRef.current.render, setFinished, delay);
+            AStar(JSON.parse(JSON.stringify(cells)), size, gridRef.current.render, setFinished, delay);
         } else if (algorithm === 'Greedy Best First Search') {
-            Greedy.print();
+            Greedy();
         }
     };
 

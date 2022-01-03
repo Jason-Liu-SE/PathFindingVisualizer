@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import useWindowDimensions from '../Hooks/useWindowDimensions';
+import Node from '../Algorithms/Node';
 
-const Node = require('../Algorithms/Node');
 const ValidCell = new RegExp('^cell[0-9]+_[0-9]+$');
 const cellSize = 20;
 const backgroundColor = 'rgba(255, 255, 255, 0.5)';

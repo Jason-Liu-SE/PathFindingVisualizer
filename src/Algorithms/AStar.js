@@ -76,7 +76,7 @@ const setPath = (nodes, start, end) => {
 
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
-async function run(nodes, size, render, setFinished, delay) {
+async function AStar(nodes, size, render, setFinished, delay) {
     ///////////////////////////////////////////////
     ////////////////// Set Up /////////////////////
     ///////////////////////////////////////////////
@@ -179,4 +179,4 @@ async function run(nodes, size, render, setFinished, delay) {
     setFinished();
 }
 
-exports.run = run;
+export default AStar;

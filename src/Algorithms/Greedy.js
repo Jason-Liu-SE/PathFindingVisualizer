@@ -1,5 +1,5 @@
-const print = () => {
+function Greedy() {
     console.log('Greedy Algorithm');
-};
+}
 
-exports.print = print;
+export default Greedy;
