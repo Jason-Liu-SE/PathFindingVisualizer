@@ -1,5 +1,6 @@
 {
     "name": "path-finding-visualizer",
+    "homepage": "https://jason-liu-se.github.io/PathFindingVisualizer/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -48,6 +49,5 @@
     "devDependencies": {
         "gh-pages": "^3.2.3",
         "prettier": "2.5.1"
-    },
-    "homepage": "https://jason-liu-se.github.io/PathFindingVisualizer/"
+    }
 }
