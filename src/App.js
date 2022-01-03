@@ -14,7 +14,7 @@ function App() {
                 <NavBar />
             </div>
             <div className='content'>
-                {/* <Visualizer /> */}
+                <Visualizer />
                 {/* <Routes> */}
                 {/* <Route path='/' element={<Visualizer />} /> */}
                 {/* <Route path='/visualizer' element={<Visualizer />} /> */}
